@@ -26,6 +26,29 @@ git remote add origin git@github.com:coding-to-music/cryptocurrency-prices-grafa
 git push -u origin main
 ```
 
+## Results
+
+Pushgateway http://localhost:9092
+
+Grafana http://localhost:3000/datasources
+
+Prometheus http://localhost:35231/graph?g0.expr=cryptocurrency_price%7Bprovider%3D%22coingecko%22%7D&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h
+
+```
+docker-compose stop
+```
+
+Output:
+
+```
+Stopping grafana       ... done
+Stopping prometheus    ... done
+Stopping rates-shipper ... done
+Stopping coins-api     ... done
+Stopping pushgateway   ... done
+Stopping rates-cache   ... done
+```
+
 # cryptocurrency-prices-grafana
 
 Fetching Cryptocurrency Prices from Coingecko and Displaying them on Grafana
