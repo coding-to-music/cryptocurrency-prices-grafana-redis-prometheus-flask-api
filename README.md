@@ -1,9 +1,39 @@
+# cryptocurrency-prices-grafana-redis-prometheus-flask-api
+
+# 🚀 Fetching Cryptocurrency Prices from Coingecko and Displaying them on Grafana 🚀
+
+https://github.com/coding-to-music/cryptocurrency-prices-grafana-redis-prometheus-flask-api
+
+From / By Ruan Bekker https://github.com/ruanbekker
+
+https://github.com/ruanbekker/cryptocurrency-prices-grafana
+
+## Environment variables:
+
+```java
+
+```
+
+## GitHub
+
+```java
+git init
+git add .
+git remote remove origin
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:coding-to-music/cryptocurrency-prices-grafana-redis-prometheus-flask-api.git
+git push -u origin main
+```
+
 # cryptocurrency-prices-grafana
+
 Fetching Cryptocurrency Prices from Coingecko and Displaying them on Grafana
 
 ## About
 
 This stack consists of:
+
 - Prometheus (timeseries database)
 - Pushgateway (introduces a /metrics endpoint for prometheus to scrape)
 - Grafana (the best)
@@ -35,6 +65,7 @@ Accessing Grafana, for me its locally on http://grafana.127.0.0.1.nip.io:3000
 Using username admin and password admin.
 
 Accessing Prometheus on http://prometheus.127.0.0.1.nip.io:9090, we can see we can fetch our metrics using promql:
+
 - `cryptocurrency_price{provider="coingecko"}`
 
 ![image](https://user-images.githubusercontent.com/567298/145400449-2410efcb-ffc0-48d8-879c-56f9d547391a.png)
