@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
 
 services:
   rates-cache:
@@ -10,8 +10,8 @@ services:
       timeout: 3s
       retries: 30
     restart: unless-stopped
-    cpus: 0.5
-    mem_limit: 64m
+    # cpus: 0.5
+    # mem_limit: 64m
     networks:
       - public
     logging:
@@ -29,13 +29,15 @@ services:
       - REDIS_TTL=60
       - DELAY_INTERVAL=15
     restart: unless-stopped
-    cpus: 0.5
-    mem_limit: 128m
+    # cpus: 0.5
+    # mem_limit: 128m
     depends_on:
-      rates-cache:
-        condition: service_healthy
-      pushgateway:
-        condition: service_started
+      - rates-cache
+      - pushgateway
+      # rates-cache:
+      #   condition: service_healthy
+      # pushgateway:
+      #   condition: service_started
     networks:
       - public
     logging:
@@ -50,13 +52,14 @@ services:
       - REDIS_HOST=rates-cache
       - REDIS_PORT=6379
     restart: unless-stopped
-    cpus: 0.5
-    mem_limit: 128m
+    # cpus: 0.5
+    # mem_limit: 128m
     ports:
       - 5000:5000
     depends_on:
-      rates-cache:
-        condition: service_healthy
+      - rates-cache
+      # rates-cache:
+      #   condition: service_healthy
     networks:
       - public
     logging:
@@ -73,13 +76,13 @@ services:
       - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./data/prometheus/data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention.time=30d'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--web.external-url=http://prometheus.127.0.0.1.nip.io:9090'
-      - '--log.level=info'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=30d"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.external-url=http://prometheus.127.0.0.1.nip.io:9090"
+      - "--log.level=info"
     ports:
       - 9090:9090
     networks:
@@ -109,8 +112,9 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      prometheus:
-        condition: service_started
+      - prometheus
+      # prometheus:
+      #   condition: service_started
     logging:
       driver: "json-file"
       options:
@@ -132,4 +136,3 @@ services:
 networks:
   public:
     name: public
-
